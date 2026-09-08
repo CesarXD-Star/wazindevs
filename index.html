@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wazin Devs - Downloads</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- SCREEN 1: PROJECTS --- */
+        #projects-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .header-title {
+            font-size: 32px;
+            font-weight: normal;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+        .project-item {
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .project-item:hover {
+            transform: scale(1.05);
+        }
+        .project-item img {
+            width: 120px;
+            height: 120px;
+            image-rendering: pixelated;
+            border-radius: 4px;
+        }
+
+        /* --- SCREEN 2: RUCKS --- */
+        #rucks-view {
+            display: none;
+        }
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: #1a202c;
+            border-right: 1px solid #2d3748;
+            padding: 20px 0;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 0 20px 15px 20px;
+            color: #e2e8f0;
+            border-bottom: 1px solid #2d3748;
+            margin-bottom: 10px;
+        }
+        .sidebar-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #a0aec0;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        .sidebar-item:hover {
+            background-color: #2d3748;
+            color: #ffffff;
+        }
+        .sidebar-item.active {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Content Area */
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        .back-btn {
+            color: #888;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+        .back-btn:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .content-header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2d3748;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .content-title {
+            font-size: 26px;
+            font-weight: normal;
+            margin: 0;
+            color: #ffffff;
+        }
+        .stats-info {
+            font-size: 14px;
+            color: #a0aec0;
+            text-align: right;
+        }
+        .stats-info span {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        /* Versions List */
+        .version-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 850px;
+        }
+        .version-card {
+            display: flex;
+            align-items: center;
+            background-color: #1a202c;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #2d3748;
+            justify-content: space-between;
+        }
+        .version-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .version-card img {
+            width: 60px;
+            height: 60px;
+            image-rendering: pixelated;
+            border-radius: 4px;
+        }
+        .version-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .version-number {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            color: #ffffff;
+        }
+        .version-desc {
+            font-size: 13px;
+            color: #a0aec0;
+            margin: 0;
+        }
+
+        /* Download Button */
+        .download-btn {
+            background-color: #3182ce;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+        .download-btn:hover {
+            background-color: #2b6cb0;
+        }
+
+        .gen-section {
+            display: none;
+        }
+        .gen-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN 1: PROJECTS -->
+    <div id="projects-view">
+        <h1 class="header-title">Projects</h1>
+        <div class="project-item" onclick="showDownloads()">
+            <img src="icon.png" alt="Rucks Logo">
+        </div>
+    </div>
+
+    <!-- SCREEN 2: RUCKS -->
+    <div id="rucks-view">
+        <div class="main-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-title">Rucks Generations</div>
+                <div class="sidebar-item active" onclick="changeGeneration('gen1', this)">Generation 1</div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <span class="back-btn" onclick="showProjects()">← Back to Projects</span>
+                
+                <div id="gen1" class="gen-section active">
+                    <div class="content-header-box">
+                        <h2 class="content-title">Downloads for Rucks - Generation 1</h2>
+                        <div class="stats-info">
+                            <div>Latest: <span>0.5.63</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="version-list">
+                        <!-- 0.5.63 -->
+                        <div class="version-card">
+                            <div class="version-left">
+                                <img src="icon.png" alt="R Icon">
+                                <div class="version-info">
+                                    <p class="version-number">0.5.63</p>
+                                    <p class="version-desc">News: Lapis Lazuli Armor Lapis Lazuli Tools</p>
+                                </div>
+                            </div>
+                            <a href="http://adfoc.us/8769421000415104" class="download-btn" target="_blank">Download</a>
+                        </div>
+
+                        <!-- 0.4.36 Fix -->
+                        <div class="version-card">
+                            <div class="version-left">
+                                <img src="icon.png" alt="R Icon">
+                                <div class="version-info">
+                                    <p class="version-number">0.4.36 Fix</p>
+                                    <p class="version-desc">Fix: es_mx</p>
+                                </div>
+                            </div>
+                            <a href="http://adfoc.us/8769421000415101" class="download-btn" target="_blank">Download</a>
+                        </div>
+
+                        <!-- 0.4.36 -->
+                        <div class="version-card">
+                            <div class="version-left">
+                                <img src="icon.png" alt="R Icon">
+                                <div class="version-info">
+                                    <p class="version-number">0.4.36</p>
+                                    <p class="version-desc">News: Coal Armor Coal Tools</p>
+                                </div>
+                            </div>
+                            <a href="http://adfoc.us/8769421000415045" class="download-btn" target="_blank">Download</a>
+                        </div>
+
+                        <!-- 0.3.21 -->
+                        <div class="version-card">
+                            <div class="version-left">
+                                <img src="icon.png" alt="R Icon">
+                                <div class="version-info">
+                                    <p class="version-number">0.3.21</p>
+                                    <p class="version-desc">New: Tools ReTexture</p>
+                                </div>
+                            </div>
+                            <a href="http://adfoc.us/8769421000415044" class="download-btn" target="_blank">Download</a>
+                        </div>
+
+                        <!-- 0.2.21 -->
+                        <div class="version-card">
+                            <div class="version-left">
+                                <img src="icon.png" alt="R Icon">
+                                <div class="version-info">
+                                    <p class="version-number">0.2.21</p>
+                                    <p class="version-desc">New: CobbleStone Armor en_us and es_mx</p>
+                                </div>
+                            </div>
+                            <a href="http://adfoc.us/8769421000415039" class="download-btn" target="_blank">Download</a>
+                        </div>
+
+                        <!-- 0.1.16 -->
+                        <div class="version-card">
+                            <div class="version-left">
+                                <img src="icon.png" alt="R Icon">
+                                <div class="version-info">
+                                    <p class="version-number">0.1.16</p>
+                                    <p class="version-desc">News: Emerald Armor Emerald Tools en_us es_mx</p>
+                                </div>
+                            </div>
+                            <a href="http://adfoc.us/8769421" class="download-btn" target="_blank">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS GENERALES -->
+    <script>
+        function showDownloads() {
+            document.getElementById('projects-view').style.display = 'none';
+            document.getElementById('rucks-view').style.display = 'block';
+        }
+
+        function showProjects() {
+            document.getElementById('rucks-view').style.display = 'none';
+            document.getElementById('projects-view').style.display = 'flex';
+        }
+
+        function changeGeneration(genId, element) {
+            const sections = document.querySelectorAll('.gen-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            const items = document.querySelectorAll('.sidebar-item');
+            items.forEach(item => item.classList.remove('active'));
+
+            document.getElementById(genId).classList.add('active');
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
