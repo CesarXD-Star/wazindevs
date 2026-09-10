@@ -170,13 +170,22 @@
             margin: 0;
         }
 
-        /* Download Button */
+        /* Download Section & Button */
+        .download-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 100px;
+        }
         .download-btn {
             background-color: #3182ce;
             color: #ffffff;
             padding: 10px 20px;
             border-radius: 4px;
-            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
             font-weight: bold;
             font-size: 14px;
             transition: background-color 0.2s;
@@ -184,6 +193,10 @@
         }
         .download-btn:hover {
             background-color: #2b6cb0;
+        }
+        .download-count {
+            font-size: 12px;
+            color: #a0aec0;
         }
 
         .gen-section {
@@ -236,7 +249,10 @@
                                     <p class="version-desc">Redstone Tools And Redstone Armor</p>
                                 </div>
                             </div>
-                            <a href="http://adfoc.us/8769421000419168" class="download-btn" target="_blank">Download</a>
+                            <div class="download-section">
+                                <button class="download-btn" onclick="registerDownload('0_6_81', 'http://adfoc.us/8769421000419168')">Download</button>
+                                <div class="download-count">Total: <span id="count-0_6_81">0</span></div>
+                            </div>
                         </div>
 
                         <!-- 0.5.63 -->
@@ -248,7 +264,10 @@
                                     <p class="version-desc">News: Lapis Lazuli Armor Lapis Lazuli Tools</p>
                                 </div>
                             </div>
-                            <a href="http://adfoc.us/8769421000415104" class="download-btn" target="_blank">Download</a>
+                            <div class="download-section">
+                                <button class="download-btn" onclick="registerDownload('0_5_63', 'http://adfoc.us/8769421000415104')">Download</button>
+                                <div class="download-count">Total: <span id="count-0_5_63">0</span></div>
+                            </div>
                         </div>
 
                         <!-- 0.4.36 Fix -->
@@ -260,7 +279,10 @@
                                     <p class="version-desc">Fix: es_mx</p>
                                 </div>
                             </div>
-                            <a href="http://adfoc.us/8769421000415101" class="download-btn" target="_blank">Download</a>
+                            <div class="download-section">
+                                <button class="download-btn" onclick="registerDownload('0_4_36_fix', 'http://adfoc.us/8769421000415101')">Download</button>
+                                <div class="download-count">Total: <span id="count-0_4_36_fix">0</span></div>
+                            </div>
                         </div>
 
                         <!-- 0.4.36 -->
@@ -272,7 +294,10 @@
                                     <p class="version-desc">News: Coal Armor Coal Tools</p>
                                 </div>
                             </div>
-                            <a href="http://adfoc.us/8769421000415045" class="download-btn" target="_blank">Download</a>
+                            <div class="download-section">
+                                <button class="download-btn" onclick="registerDownload('0_4_36', 'http://adfoc.us/8769421000415045')">Download</button>
+                                <div class="download-count">Total: <span id="count-0_4_36">0</span></div>
+                            </div>
                         </div>
 
                         <!-- 0.3.21 -->
@@ -284,7 +309,10 @@
                                     <p class="version-desc">New: Tools ReTexture</p>
                                 </div>
                             </div>
-                            <a href="http://adfoc.us/8769421000415044" class="download-btn" target="_blank">Download</a>
+                            <div class="download-section">
+                                <button class="download-btn" onclick="registerDownload('0_3_21', 'http://adfoc.us/8769421000415044')">Download</button>
+                                <div class="download-count">Total: <span id="count-0_3_21">0</span></div>
+                            </div>
                         </div>
 
                         <!-- 0.2.21 -->
@@ -296,7 +324,10 @@
                                     <p class="version-desc">New: CobbleStone Armor en_us and es_mx</p>
                                 </div>
                             </div>
-                            <a href="http://adfoc.us/8769421000415039" class="download-btn" target="_blank">Download</a>
+                            <div class="download-section">
+                                <button class="download-btn" onclick="registerDownload('0_2_21', 'http://adfoc.us/8769421000415039')">Download</button>
+                                <div class="download-count">Total: <span id="count-0_2_21">0</span></div>
+                            </div>
                         </div>
 
                         <!-- 0.1.16 -->
@@ -308,7 +339,10 @@
                                     <p class="version-desc">News: Emerald Armor Emerald Tools en_us es_mx</p>
                                 </div>
                             </div>
-                            <a href="http://adfoc.us/8769421" class="download-btn" target="_blank">Download</a>
+                            <div class="download-section">
+                                <button class="download-btn" onclick="registerDownload('0_1_16', 'http://adfoc.us/8769421')">Download</button>
+                                <div class="download-count">Total: <span id="count-0_1_16">0</span></div>
+                            </div>
                         </div>
                         
                     </div>
@@ -319,6 +353,41 @@
 
     <!-- SCRIPTS GENERALES -->
     <script>
+        // Nombre del proyecto en la API pública (puedes cambiarlo si quieres)
+        const namespace = 'wazindevs_rucks_downloads';
+        
+        // Versiones que tenemos registradas
+        const versions = ['0_6_81', '0_5_63', '0_4_36_fix', '0_4_36', '0_3_21', '0_2_21', '0_1_16'];
+
+        // Cargar los totales al abrir la página
+        window.onload = () => {
+            versions.forEach(v => {
+                fetch(`https://api.counterapi.dev/v1/${namespace}/${v}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById(`count-${v}`).innerText = data.count || 0;
+                    })
+                    .catch(() => {
+                        document.getElementById(`count-${v}`).innerText = "0";
+                    });
+            });
+        };
+
+        // Al hacer clic en descargar: abre el acortador y suma +1 al contador
+        function registerDownload(version, url) {
+            window.open(url, '_blank');
+
+            fetch(`https://api.counterapi.dev/v1/${namespace}/${version}/up`)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.count) {
+                        document.getElementById(`count-${version}`).innerText = data.count;
+                    }
+                })
+                .catch(error => console.error('Error registrando descarga:', error));
+        }
+
+        // Navegación de vistas
         function showDownloads() {
             document.getElementById('projects-view').style.display = 'none';
             document.getElementById('rucks-view').style.display = 'block';
