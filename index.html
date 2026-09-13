@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wazin Devs - Downloads</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             background-color: #121212;
             color: #ffffff;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -20,26 +23,67 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            padding: 40px 20px;
         }
         .header-title {
-            font-size: 32px;
-            font-weight: normal;
+            font-size: 36px;
+            font-weight: 600;
             margin-top: 0;
             margin-bottom: 40px;
+            letter-spacing: 1px;
         }
-        .project-item {
+        .projects-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1000px;
+        }
+        .project-card {
+            background-color: #1a202c;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            padding: 30px;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             cursor: pointer;
-            text-align: center;
-            transition: transform 0.2s;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
-        .project-item:hover {
-            transform: scale(1.05);
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #3182ce;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
-        .project-item img {
-            width: 120px;
-            height: 120px;
+        .project-card img {
+            width: 140px;
+            height: 140px;
             image-rendering: pixelated;
-            border-radius: 4px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .project-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
+        .project-desc {
+            font-size: 14px;
+            color: #a0aec0;
+            text-align: center;
+            margin: 0 0 20px 0;
+            line-height: 1.4;
+        }
+        .project-tag {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 20px;
         }
 
         /* --- SCREEN 2: RUCKS --- */
@@ -53,23 +97,24 @@
 
         /* Sidebar */
         .sidebar {
-            width: 260px;
+            width: 280px;
             background-color: #1a202c;
             border-right: 1px solid #2d3748;
-            padding: 20px 0;
-            box-sizing: border-box;
+            padding: 30px 0;
             flex-shrink: 0;
         }
         .sidebar-title {
             font-size: 16px;
             font-weight: bold;
-            padding: 0 20px 15px 20px;
+            padding: 0 25px 18px 25px;
             color: #e2e8f0;
             border-bottom: 1px solid #2d3748;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .sidebar-item {
-            padding: 12px 20px;
+            padding: 14px 25px;
             cursor: pointer;
             color: #a0aec0;
             font-size: 15px;
@@ -80,7 +125,7 @@
             color: #ffffff;
         }
         .sidebar-item.active {
-            background-color: #2b6cb0;
+            background-color: #3182ce;
             color: #ffffff;
             font-weight: bold;
         }
@@ -88,19 +133,21 @@
         /* Content Area */
         .content {
             flex-grow: 1;
-            padding: 40px;
-            box-sizing: border-box;
+            padding: 50px 60px;
         }
         .back-btn {
-            color: #888;
+            color: #a0aec0;
             cursor: pointer;
             font-size: 14px;
-            display: inline-block;
-            margin-bottom: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            font-weight: 500;
+            transition: color 0.2s;
         }
         .back-btn:hover {
-            color: #fff;
-            text-decoration: underline;
+            color: #3182ce;
         }
         
         .content-header-box {
@@ -108,49 +155,57 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #2d3748;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            padding-bottom: 20px;
+            margin-bottom: 35px;
         }
         .content-title {
-            font-size: 26px;
-            font-weight: normal;
+            font-size: 28px;
+            font-weight: 600;
             margin: 0;
             color: #ffffff;
         }
         .stats-info {
             font-size: 14px;
             color: #a0aec0;
-            text-align: right;
         }
         .stats-info span {
             color: #4CAF50;
             font-weight: bold;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
         }
 
         /* Versions List */
         .version-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            max-width: 850px;
+            gap: 16px;
+            width: 100%;
+            max-width: 1050px;
         }
         .version-card {
             display: flex;
             align-items: center;
             background-color: #1a202c;
-            padding: 20px;
-            border-radius: 6px;
+            padding: 22px 28px;
+            border-radius: 8px;
             border: 1px solid #2d3748;
             justify-content: space-between;
+            transition: border-color 0.2s;
+        }
+        .version-card:hover {
+            border-color: #4a5568;
         }
         .version-left {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
         }
         .version-card img {
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             image-rendering: pixelated;
             border-radius: 4px;
         }
@@ -161,11 +216,11 @@
         .version-number {
             font-size: 20px;
             font-weight: bold;
-            margin: 0 0 5px 0;
+            margin: 0 0 6px 0;
             color: #ffffff;
         }
         .version-desc {
-            font-size: 13px;
+            font-size: 14px;
             color: #a0aec0;
             margin: 0;
         }
@@ -174,16 +229,19 @@
         .download-btn {
             background-color: #3182ce;
             color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 12px 24px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.1s;
             white-space: nowrap;
         }
         .download-btn:hover {
             background-color: #2b6cb0;
+        }
+        .download-btn:active {
+            transform: scale(0.98);
         }
 
         .gen-section {
@@ -199,8 +257,13 @@
     <!-- SCREEN 1: PROJECTS -->
     <div id="projects-view">
         <h1 class="header-title">Projects</h1>
-        <div class="project-item" onclick="showDownloads()">
-            <img src="icon.png" alt="Rucks Logo">
+        <div class="projects-grid">
+            <div class="project-card" onclick="showDownloads()">
+                <img src="icon.png" alt="Rucks Logo">
+                <div class="project-name">Rucks</div>
+                <div class="project-desc">Official downloads for Rucks generations and releases.</div>
+                <span class="project-tag">View Downloads</span>
+            </div>
         </div>
     </div>
 
@@ -221,7 +284,7 @@
                     <div class="content-header-box">
                         <h2 class="content-title">Downloads for Rucks - Generation 1</h2>
                         <div class="stats-info">
-                            <div>Latest: <span>0.7.99</span></div>
+                            Latest Version: <span>0.7.99</span>
                         </div>
                     </div>
                     
