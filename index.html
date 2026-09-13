@@ -158,24 +158,11 @@
             display: flex;
             flex-direction: column;
         }
-        .version-title-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 5px;
-        }
         .version-number {
             font-size: 20px;
             font-weight: bold;
-            margin: 0;
+            margin: 0 0 5px 0;
             color: #ffffff;
-        }
-        .version-date {
-            font-size: 12px;
-            color: #a0aec0;
-            background-color: #2d3748;
-            padding: 2px 8px;
-            border-radius: 12px;
         }
         .version-desc {
             font-size: 13px;
@@ -245,10 +232,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.7.99</p>
-                                        <span class="version-date" data-date="2026-09-13"></span>
-                                    </div>
+                                    <p class="version-number">0.7.99</p>
                                     <p class="version-desc">News: Quartz Tools And Quartz Items</p>
                                 </div>
                             </div>
@@ -260,10 +244,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.6.81</p>
-                                        <span class="version-date" data-date="2026-09-08"></span>
-                                    </div>
+                                    <p class="version-number">0.6.81</p>
                                     <p class="version-desc">News: Redstone Tools And Redstone Armor</p>
                                 </div>
                             </div>
@@ -275,10 +256,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.5.63</p>
-                                        <span class="version-date" data-date="2026-08-20"></span>
-                                    </div>
+                                    <p class="version-number">0.5.63</p>
                                     <p class="version-desc">News: Lapis Lazuli Armor Lapis Lazuli Tools</p>
                                 </div>
                             </div>
@@ -290,10 +268,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.4.36 Fix</p>
-                                        <span class="version-date" data-date="2026-08-01"></span>
-                                    </div>
+                                    <p class="version-number">0.4.36 Fix</p>
                                     <p class="version-desc">Fix: es_mx</p>
                                 </div>
                             </div>
@@ -305,10 +280,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.4.36</p>
-                                        <span class="version-date" data-date="2026-07-25"></span>
-                                    </div>
+                                    <p class="version-number">0.4.36</p>
                                     <p class="version-desc">News: Coal Armor Coal Tools</p>
                                 </div>
                             </div>
@@ -320,10 +292,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.3.21</p>
-                                        <span class="version-date" data-date="2026-06-15"></span>
-                                    </div>
+                                    <p class="version-number">0.3.21</p>
                                     <p class="version-desc">New: Tools ReTexture</p>
                                 </div>
                             </div>
@@ -335,10 +304,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.2.21</p>
-                                        <span class="version-date" data-date="2026-05-10"></span>
-                                    </div>
+                                    <p class="version-number">0.2.21</p>
                                     <p class="version-desc">New: CobbleStone Armor en_us and es_mx</p>
                                 </div>
                             </div>
@@ -350,10 +316,7 @@
                             <div class="version-left">
                                 <img src="icon.png" alt="R Icon">
                                 <div class="version-info">
-                                    <div class="version-title-row">
-                                        <p class="version-number">0.1.16</p>
-                                        <span class="version-date" data-date="2025-09-10"></span>
-                                    </div>
+                                    <p class="version-number">0.1.16</p>
                                     <p class="version-desc">News: Emerald Armor Emerald Tools en_us es_mx</p>
                                 </div>
                             </div>
@@ -388,48 +351,6 @@
             document.getElementById(genId).classList.add('active');
             element.classList.add('active');
         }
-
-        // Función para calcular tiempo relativo automáticamente (Ej: 1 day ago, 2 weeks ago, 1 year ago)
-        function getRelativeTime(dateString) {
-            const date = new Date(dateString);
-            const now = new Date();
-            const diffInSeconds = Math.floor((now - date) / 1000);
-
-            if (diffInSeconds < 60) return "Just now";
-
-            const diffInMinutes = Math.floor(diffInSeconds / 60);
-            if (diffInMinutes < 60) return diffInMinutes === 1 ? "1 minute ago" : `${diffInMinutes} minutes ago`;
-
-            const diffInHours = Math.floor(diffInMinutes / 60);
-            if (diffInHours < 24) return diffInHours === 1 ? "1 hour ago" : `${diffInHours} hours ago`;
-
-            const diffInDays = Math.floor(diffInHours / 24);
-            if (diffInDays < 7) return diffInDays === 1 ? "1 day ago" : `${diffInDays} days ago`;
-
-            const diffInWeeks = Math.floor(diffInDays / 7);
-            if (diffInWeeks < 4) return diffInWeeks === 1 ? "1 week ago" : `${diffInWeeks} weeks ago`;
-
-            const diffInMonths = Math.floor(diffInDays / 30.4375);
-            if (diffInMonths < 12) return diffInMonths === 1 ? "1 month ago" : `${diffInMonths} months ago`;
-
-            const diffInYears = Math.floor(diffInDays / 365.25);
-            return diffInYears === 1 ? "1 year ago" : `${diffInYears} years ago`;
-        }
-
-        // Actualiza automáticamente todas las etiquetas con data-date
-        function updateAllDates() {
-            document.querySelectorAll('.version-date[data-date]').forEach(element => {
-                const rawDate = element.getAttribute('data-date');
-                if (rawDate) {
-                    element.textContent = getRelativeTime(rawDate);
-                }
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            updateAllDates();
-            setInterval(updateAllDates, 60000); // Recalcula cada minuto por si la página se queda abierta
-        });
     </script>
 </body>
 </html>
